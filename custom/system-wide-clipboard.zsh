@@ -1,36 +1,36 @@
 pb-kill-line () {
   zle kill-line
-  echo -n $CUTBUFFER | pbcopy
+  echo -n $CUTBUFFER | clipcopy
 }
 
 pb-kill-whole-line () {
   zle kill-whole-line
-  echo -n $CUTBUFFER | pbcopy
+  echo -n $CUTBUFFER | clipcopy
 }
 
 pb-backward-kill-word () {
   zle backward-kill-word
-  echo -n $CUTBUFFER | pbcopy
+  echo -n $CUTBUFFER | clipcopy
 }
 
 pb-kill-word () {
   zle kill-word
-  echo -n $CUTBUFFER | pbcopy
+  echo -n $CUTBUFFER | clipcopy
 }
 
 pb-kill-buffer () {
   zle kill-buffer
-  echo -n $CUTBUFFER | pbcopy
+  echo -n $CUTBUFFER | clipcopy
 }
 
 pb-copy-region-as-kill-deactivate-mark () {
   zle copy-region-as-kill
   zle set-mark-command -n -1
-  echo -n $CUTBUFFER | pbcopy
+  echo -n $CUTBUFFER | clipcopy
 }
 
 pb-yank () {
-  CUTBUFFER=$(pbpaste)
+  CUTBUFFER=$(clippaste)
   zle yank
 }
 
@@ -42,16 +42,14 @@ zle -N pb-kill-buffer
 zle -N pb-copy-region-as-kill-deactivate-mark
 zle -N pb-yank
 
-if [[ `uname` == 'Darwin' ]]; then
-    bindkey '^K'   pb-kill-line
-    bindkey '^U'   pb-kill-whole-line
-    bindkey '\e^?' pb-backward-kill-word
-    bindkey '\e^H' pb-backward-kill-word
-    bindkey '^W'   pb-backward-kill-word
-    bindkey '\ed'  pb-kill-word
-    bindkey '\eD'  pb-kill-word
-    bindkey '^X^K' pb-kill-buffer
-    bindkey '\ew'  pb-copy-region-as-kill-deactivate-mark
-    bindkey '\eW'  pb-copy-region-as-kill-deactivate-mark
-    bindkey '^Y'   pb-yank
-fi
+bindkey '^K'   pb-kill-line
+bindkey '^U'   pb-kill-whole-line
+bindkey '\e^?' pb-backward-kill-word
+bindkey '\e^H' pb-backward-kill-word
+bindkey '^W'   pb-backward-kill-word
+bindkey '\ed'  pb-kill-word
+bindkey '\eD'  pb-kill-word
+bindkey '^X^K' pb-kill-buffer
+bindkey '\ew'  pb-copy-region-as-kill-deactivate-mark
+bindkey '\eW'  pb-copy-region-as-kill-deactivate-mark
+bindkey '^Y'   pb-yank
